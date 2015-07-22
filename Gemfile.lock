@@ -21,3 +21,4 @@ PLATFORMS
 
 DEPENDENCIES
   rspec (>= 3.0.0)
+  rspec-expectations
