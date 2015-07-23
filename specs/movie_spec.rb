@@ -6,6 +6,6 @@ describe Movie do
     end
 
     it "to_s method from movie have to return the name of movie" do
-        expect(@movie.to_s()).to have_content("Back to the future")
+        expect(@movie.to_s()).to eq("Back to the future")
     end
 end
