@@ -13,4 +13,8 @@ class RentalStore
     def movies
         @movieList
     end
+
+    def add_movie(movie)
+        @movieList << movie
+    end
 end
