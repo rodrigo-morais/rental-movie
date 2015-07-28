@@ -1,4 +1,6 @@
 require './lib/client'
+require './lib/watched'
+require './lib/movie'
 
 describe Client do
     before do
@@ -7,5 +9,17 @@ describe Client do
 
     it "to_s method from client have to return the name of client" do
         expect(@client.to_s()).to eq("Rodrigo Morais")
+    end
+
+    it "verify if the watched movies list start without movies" do
+        expect(@client.watchedMovies.length).to eq(0)
+    end
+
+    it "add a new watched movie in the list of watched movies" do
+        @movie = Movie.new "Back to the future", 1, "Action", 134
+
+        @client.addWatched @movie, 23
+
+        expect(@client.watchedMovies.length).to eq(1)
     end
 end
