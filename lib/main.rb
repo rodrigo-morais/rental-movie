@@ -20,7 +20,8 @@ def main
     puts ' 3 - Register movie watched by client'
     puts ' 4 - Register movie watched by client'
     puts ' 5 - Show movies registered'
-    puts ' 6 - Exit'
+    puts ' 6 - Show clients registered'
+    puts ' 7 - Exit'
 
     print 'Choose an option: '
 end
@@ -76,16 +77,32 @@ def add_client
     main
 end
 
+def show_clients
+    clear
+    
+    puts "Clients"
+    @rentalStore.clients.each do |client|
+        puts " " + client.to_s
+    end
+
+    puts ""
+    puts "Press any key to return"
+    gets
+
+    main
+end
+
 main
 
 @option = 0
 
-while @option != 6 do
+while @option != 7 do
     @option = gets.to_i
 
     case @option
         when 1 then add_movie
         when 2 then add_client
         when 5 then show_movies
+        when 6 then show_clients
     end
 end
