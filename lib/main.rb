@@ -10,6 +10,9 @@ end
 
 def main
     clear
+
+    puts 'Rental Store'
+    puts ''
     
     puts 'Menu'
     puts ' 1 - Register movie'
@@ -55,9 +58,23 @@ def show_movies
     main
 end
 
-puts 'Rental Store'
-puts ''
+def add_client
+    clear
+    
+    puts "What's the client's name?"
+    @name = gets
 
+    puts "What's the client's address?"
+    @address = gets
+
+    puts "What's the client's phone?"
+    @phone = gets
+
+    @client = Client.new @name, 0, @address, @phone
+    @rentalStore.add_client @client
+
+    main
+end
 
 main
 
@@ -68,6 +85,7 @@ while @option != 6 do
 
     case @option
         when 1 then add_movie
+        when 2 then add_client
         when 5 then show_movies
     end
 end
