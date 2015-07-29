@@ -18,10 +18,9 @@ def main
     puts ' 1 - Register movie'
     puts ' 2 - Register client'
     puts ' 3 - Register movie watched by client'
-    puts ' 4 - Register movie watched by client'
-    puts ' 5 - Show movies registered'
-    puts ' 6 - Show clients registered'
-    puts ' 7 - Exit'
+    puts ' 4 - Show movies registered'
+    puts ' 5 - Show clients registered'
+    puts ' 6 - Exit'
 
     print 'Choose an option: '
 end
@@ -96,13 +95,13 @@ main
 
 @option = 0
 
-while @option != 7 do
+while @option != 6 do
     @option = gets.to_i
 
     case @option
         when 1 then add_movie
         when 2 then add_client
-        when 5 then show_movies
-        when 6 then show_clients
+        when 4 then show_movies
+        when 5 then show_clients
     end
 end
