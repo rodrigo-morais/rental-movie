@@ -27,4 +27,18 @@ describe RentalStore do
 
         expect(@rentalStore.clients.length).to eq(1)
     end
+
+    it "should return a movie from movies list using the name to looking for it" do
+        @movie = Movie.new "Back to the future", 1, "Action", 134
+        @rentalStore.add_movie(@movie)
+
+        expect(@rentalStore.get_movie("Back to the future")).to be_an_instance_of Movie
+    end
+
+    it "should return nil from movies list using the name to looking for it when the movie doesn't exist in the list" do
+        @movie = Movie.new "Back to the future", 1, "Action", 134
+        @rentalStore.add_movie(@movie)
+
+        expect(@rentalStore.get_movie("Back to the past")).to be nil
+    end
 end
