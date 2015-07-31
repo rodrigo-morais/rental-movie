@@ -41,4 +41,18 @@ describe RentalStore do
 
         expect(@rentalStore.get_movie("Back to the past")).to be nil
     end
+
+    it "should return a client from clients list using the name to looking for it" do
+        @client = Client.new "Rodrigo Morais", 1, "24th October Street", "5136845328"
+        @rentalStore.add_client(@client)
+
+        expect(@rentalStore.get_client("Rodrigo Morais")).to be_an_instance_of Client
+    end
+
+    it "should return nil from clients list using the name to looking for it when the client doesn't exist in the list" do
+        @client = Client.new "Rodrigo Morais", 1, "24th October Street", "5136845328"
+        @rentalStore.add_client(@client)
+
+        expect(@rentalStore.get_client("Ana Paula")).to be nil
+    end
 end

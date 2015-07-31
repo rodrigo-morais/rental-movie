@@ -36,4 +36,14 @@ class RentalStore
 
         return @movies.length > 0 ? @movies[0] : nil
     end
+
+    def get_client(name)
+        @clients = @clientList.map do |client|
+            if client.name == name
+                client
+            end
+        end
+
+        return @clients.length > 0 ? @clients[0] : nil
+    end
 end
