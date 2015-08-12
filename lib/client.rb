@@ -1,3 +1,5 @@
+require './lib/watched'
+
 class Client
     attr_accessor :name, :id, :address, :phone
     attr_reader :watchedMovies
@@ -15,7 +17,8 @@ class Client
         @name
     end
 
-    def addWatched(movie, duration)
+    def add_watched(movie, duration)
+        puts 'client method'
         watched = Watched.new movie, duration
         @watchedMovies << watched
     end
