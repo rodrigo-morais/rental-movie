@@ -7,6 +7,6 @@ class Watched
     end
 
     def to_s
-        @movie.to_s + ' - ' + @duration.to_s + ' minutes'
+        @movie.to_s.gsub(/\n/," ") + " - " + @duration.to_s + " minutes"
     end
 end

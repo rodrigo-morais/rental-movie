@@ -18,7 +18,6 @@ class Client
     end
 
     def add_watched(movie, duration)
-        puts 'client method'
         watched = Watched.new movie, duration
         @watchedMovies << watched
     end
