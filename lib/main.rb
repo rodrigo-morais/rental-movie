@@ -20,9 +20,8 @@ def main
     puts ' 3 - Register movie watched by client'
     puts ' 4 - Show movies registered'
     puts ' 5 - Show clients registered'
-    puts ' 6 - Add a movie as watched in client list'
-    puts ' 7 - Show watched by client'
-    puts ' 8 - Exit'
+    puts ' 6 - Show watched by client'
+    puts ' 7 - Exit'
 
     print 'Choose an option: '
 end
@@ -168,15 +167,15 @@ main
 
 @option = 0
 
-while @option != 8 do
+while @option != 7 do
     @option = gets.to_i
 
     case @option
         when 1 then add_movie
         when 2 then add_client
+        when 3 then add_watched
         when 4 then show_movies
         when 5 then show_clients
-        when 6 then add_watched
-        when 7 then show_watched
+        when 6 then show_watched
     end
 end
