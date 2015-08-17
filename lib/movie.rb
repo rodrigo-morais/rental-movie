@@ -1,9 +1,17 @@
-class Movie
-    attr_accessor :name, :id, :genre, :duration
+require 'mongo_mapper'
 
-    def initialize(name, id, genre, duration)
+class Movie
+    include MongoMapper::EmbeddedDocument
+
+    attr_accessor :name, :genre, :duration
+
+    key :name, String
+    key :genre, String
+    key :duration, Integer
+    belongs_to :rental
+
+    def initialize(name, genre, duration)
         @name = name
-        @id = id
         @genre = genre
         @duration = duration
     end

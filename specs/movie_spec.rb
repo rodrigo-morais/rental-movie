@@ -2,7 +2,7 @@ require './lib/movie'
 
 describe Movie do
     before do
-        @movie = Movie.new "Back to the future", 1, "Action", 134
+        @movie = Movie.new "Back to the future", "Action", 134
     end
 
     it "to_s method from movie have to return the name of movie" do

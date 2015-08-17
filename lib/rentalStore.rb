@@ -1,11 +1,18 @@
 require 'set'
+require 'mongo_mapper'
 
 class RentalStore
+    include MongoMapper::Document
+
     attr_accessor :name, :id
 
-    def initialize(name, id)
+    many :movies
+    many :clients
+    key :name, String
+    timestamps!
+
+    def initialize(name)
         @name = name
-        @id = id
 
         @movieList = Set.new
         @clientList = Set.new

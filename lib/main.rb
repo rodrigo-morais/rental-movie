@@ -1,8 +1,12 @@
 require './lib/rentalStore'
 require './lib/movie'
 require './lib/client'
+require 'mongo_mapper'
 
-@rentalStore = RentalStore.new "Malaju", 0
+MongoMapper.connection = Mongo::Connection.new('RODRIGO-UBUNTU')
+MongoMapper.database = 'rental-store'
+
+@rentalStore = RentalStore.new "Malaju"
 
 def clear
     puts "\e[H\e[2J"

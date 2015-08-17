@@ -1,12 +1,19 @@
 require './lib/watched'
+require 'mongo_mapper'
 
 class Client
+    include MongoMapper::EmbeddedDocument
+
     attr_accessor :name, :id, :address, :phone
     attr_reader :watchedMovies
 
-    def initialize(name, id, address, phone)
+    key :name, String
+    key :address, String
+    key :phone, String
+    belongs_to :rental
+
+    def initialize(name, address, phone)
         @name = name
-        @id = id
         @address = address
         @phone = phone
 
