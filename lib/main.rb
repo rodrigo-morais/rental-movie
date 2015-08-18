@@ -2,6 +2,7 @@ require './lib/rentalStore'
 require './lib/movie'
 require './lib/client'
 require 'mongo_mapper'
+require './lib/repositories/rentalStoreRepo'
 
 MongoMapper.connection = Mongo::Connection.new('RODRIGO-UBUNTU')
 MongoMapper.database = 'rental-store'
