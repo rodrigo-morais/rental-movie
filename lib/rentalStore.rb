@@ -1,21 +1,21 @@
 require 'set'
-require 'mongo_mapper'
+require './lib/repositories/rentalStoreRepo'
 
 class RentalStore
-    include MongoMapper::Document
-
     attr_accessor :name, :id
-
-    many :movies
-    many :clients
-    key :name, String
-    timestamps!
 
     def initialize(name)
         @name = name
 
         @movieList = Set.new
         @clientList = Set.new
+
+        @repo = RentalStoreRepo.where(:name => name).first
+
+        if @repo == nil
+            @repo = RentalStoreRepo.new(:name => name)
+            save
+        end
     end
 
     def movies
@@ -53,4 +53,9 @@ class RentalStore
 
         return @clients.length > 0 ? @clients[0] : nil
     end
+
+    def save
+        @repo.save!
+    end
+
 end
