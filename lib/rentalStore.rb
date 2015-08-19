@@ -1,5 +1,5 @@
 require 'set'
-require './lib/repositories/rentalStoreRepo'
+require './lib/repositories/rentalStores'
 
 class RentalStore
     attr_accessor :name, :id
@@ -10,10 +10,10 @@ class RentalStore
         @movieList = Set.new
         @clientList = Set.new
 
-        @repo = RentalStoreRepo.where(:name => name).first
+        @repo = RentalStores.where(:name => name).first
 
         if @repo == nil
-            @repo = RentalStoreRepo.new(:name => name)
+            @repo = RentalStores.new(:name => name)
             save
         end
     end

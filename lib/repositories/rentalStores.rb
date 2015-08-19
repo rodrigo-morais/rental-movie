@@ -1,6 +1,7 @@
+
 require 'mongo_mapper'
 
-class RentalStoreRepo
+class RentalStores
     include MongoMapper::Document
 
     set_collection_name "rental_stores"

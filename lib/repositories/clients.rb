@@ -1,10 +1,11 @@
 require 'mongo_mapper'
 
-class MovieRepo
+class Clients
     include MongoMapper::EmbeddedDocument
 
     key :name, String
-    key :genre, String
-    key :duration, Integer
+    key :address, String
+    key :phone, String
+    many :watched_movies
     belongs_to :rental
 end

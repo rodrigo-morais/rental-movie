@@ -1,6 +1,6 @@
 require 'mongo_mapper'
 
-class WatchedRepo
+class Watcheds
     include MongoMapper::EmbeddedDocument
 
     key :duration, Integer
