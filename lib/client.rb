@@ -1,5 +1,6 @@
 require './lib/watched'
 require 'mongo_mapper'
+require './lib/repositories/clients'
 
 class Client
     include MongoMapper::EmbeddedDocument
@@ -18,6 +19,8 @@ class Client
         @phone = phone
 
         @watchedMovies = Set.new
+
+        @repo = Clients.new(:name => name, :address => address, :phone => phone)
     end
 
     def to_s

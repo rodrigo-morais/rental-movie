@@ -1,9 +1,13 @@
+require './lib/repositories/watcheds'
+
 class Watched
     attr_accessor :movie, :duration
 
     def initialize(movie, duration)
         @movie = movie
         @duration = duration
+
+        @repo = Watcheds.new(:movie => movie, :duration => duration)
     end
 
     def to_s

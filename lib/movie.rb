@@ -1,3 +1,5 @@
+require './lib/repositories/movies'
+
 class Movie
     attr_accessor :name, :genre, :duration
 
@@ -5,6 +7,8 @@ class Movie
         @name = name
         @genre = genre
         @duration = duration
+
+        @repo = Movies.new(:name => name, :genre => genre, :duration => duration)
     end
 
     def to_s
