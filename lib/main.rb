@@ -43,7 +43,7 @@ def add_movie
     puts "What's the movies duration?"
     @duration = gets.to_i
 
-    @movie = Movie.new @title, 0, @genre, @duration
+    @movie = Movie.new @title, @genre, @duration
     @rentalStore.add_movie @movie
 
     main
@@ -76,7 +76,7 @@ def add_client
     puts "What's the client's phone?"
     @phone = gets
 
-    @client = Client.new @name, 0, @address.gsub(/\n/," "), @phone.gsub(/\n/," ")
+    @client = Client.new @name, @address.gsub(/\n/," "), @phone.gsub(/\n/," ")
     @rentalStore.add_client @client
 
     main

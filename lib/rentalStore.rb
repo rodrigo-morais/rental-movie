@@ -28,10 +28,15 @@ class RentalStore
 
     def add_movie(movie)
         @movieList << movie
+        #@repo.push(:movies => movie.get_repository.to_mongo)
+        @repo.movies << movie.get_repository
+        save
     end
 
     def add_client(client)
         @clientList << client
+        @repo.clients << client.get_repository
+        save
     end
 
     def get_movie(name)

@@ -14,4 +14,8 @@ class Movie
     def to_s
         @name
     end
+
+    def get_repository
+        @repo
+    end
 end

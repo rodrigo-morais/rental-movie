@@ -1,4 +1,5 @@
 require 'mongo_mapper'
+require './lib/repositories/watcheds'
 
 class Clients
     include MongoMapper::EmbeddedDocument
@@ -6,6 +7,6 @@ class Clients
     key :name, String
     key :address, String
     key :phone, String
-    many :watched_movies
-    belongs_to :rental
+    many :watched_movies, :class_name  => "Watcheds"
+
 end
