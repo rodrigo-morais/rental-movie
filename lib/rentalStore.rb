@@ -16,6 +16,17 @@ class RentalStore
             @repo = RentalStores.new(:name => name)
             save
         end
+
+        @repo.clients.each do |client|
+            newClient = Client.new client.name, client.address, client.phone
+            @clientList << newClient
+        end
+
+        @repo.movies.each do |movie|
+            newMovie = Movie.new movie.name, movie.genre, movie.duration
+            @movieList << newMovie
+        end
+
     end
 
     def movies
@@ -28,7 +39,6 @@ class RentalStore
 
     def add_movie(movie)
         @movieList << movie
-        #@repo.push(:movies => movie.get_repository.to_mongo)
         @repo.movies << movie.get_repository
         save
     end
