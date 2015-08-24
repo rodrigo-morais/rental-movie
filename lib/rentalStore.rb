@@ -82,8 +82,6 @@ class RentalStore
     end
 
     def save
-        puts @repo.changed?
-        gets
         @repo.save!
     end
 
