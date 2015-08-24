@@ -7,8 +7,7 @@ class Watched
         @movie = movie
         @duration = duration
 
-        @repo = Watcheds.new(:movie => movie, :duration => duration)
-        save
+        @repo = Watcheds.new(:movie => movie.get_repository, :duration => duration)
     end
 
     def to_s
@@ -17,9 +16,5 @@ class Watched
 
     def get_repository
         @repo
-    end
-
-    def save
-        @repo.save!
     end
 end

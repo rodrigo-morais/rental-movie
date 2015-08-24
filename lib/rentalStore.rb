@@ -19,6 +19,18 @@ class RentalStore
 
         @repo.clients.each do |client|
             newClient = Client.new client.name, client.address, client.phone
+
+            client.watched_movies.each do |watched|
+                movie = @repo.movies.select{ |movie| movie.id == watched.movie_id }
+                
+                if movie.empty? == false
+                    movie = movie[0]
+                    newMovie = Movie.new movie.name, movie.genre, movie.duration
+
+                    newClient.add_watched newMovie, watched.duration
+                end
+            end
+
             @clientList << newClient
         end
 
@@ -70,6 +82,8 @@ class RentalStore
     end
 
     def save
+        puts @repo.changed?
+        gets
         @repo.save!
     end
 

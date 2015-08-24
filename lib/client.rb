@@ -13,7 +13,6 @@ class Client
         @watchedMovies = Set.new
 
         @repo = Clients.new(:name => name, :address => address, :phone => phone)
-        save
     end
 
     def to_s
@@ -24,14 +23,9 @@ class Client
         watched = Watched.new movie, duration
         @watchedMovies << watched
         @repo.watched_movies << watched.get_repository
-        save
     end
 
     def get_repository
         @repo
-    end
-
-    def save
-        @repo.save!
     end
 end

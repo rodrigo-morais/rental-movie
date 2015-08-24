@@ -145,6 +145,8 @@ def add_watched
 
     @clients[0].add_watched @movies[0], @duration
 
+    @rentalStore.save
+
     main
 end
 
