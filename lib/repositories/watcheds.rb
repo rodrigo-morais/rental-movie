@@ -1,8 +1,8 @@
-require 'mongo_mapper'
+require 'mongoid'
 
 class Watcheds
-    include MongoMapper::EmbeddedDocument
+    include Mongoid::Document
 
-    key :duration, Integer
-    belongs_to :movie
+    field :duration, type: Integer
+    belongs_to :movie, class_name: "Movies"
 end

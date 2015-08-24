@@ -1,10 +1,10 @@
-require 'mongo_mapper'
+require 'mongoid'
 
 class Movies
-    include MongoMapper::EmbeddedDocument
+    include Mongoid::Document
 
-    key :name, String
-    key :genre, String
-    key :duration, Integer
+    field :name, type: String
+    field :genre, type: String
+    field :duration, type: Integer
 
 end

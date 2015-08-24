@@ -1,12 +1,12 @@
-require 'mongo_mapper'
+require 'mongoid'
 require './lib/repositories/watcheds'
 
 class Clients
-    include MongoMapper::EmbeddedDocument
+    include Mongoid::Document
 
-    key :name, String
-    key :address, String
-    key :phone, String
-    many :watched_movies, :class_name  => "Watcheds"
+    field :name, type: String
+    field :address, type: String
+    field :phone, type: String
+    has_many :watched_movies
 
 end
