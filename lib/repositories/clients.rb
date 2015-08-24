@@ -7,6 +7,6 @@ class Clients
     field :name, type: String
     field :address, type: String
     field :phone, type: String
-    has_many :watched_movies
+    embeds_many :watched_movies, class_name: "Watcheds"
 
 end

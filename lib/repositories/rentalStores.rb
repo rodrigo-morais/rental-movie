@@ -8,8 +8,8 @@ class RentalStores
 
     store_in collection: "rental_stores"
 
-    has_many :clients, class_name: "Clients"
-    has_many :movies, class_name: "Movies"
+    embeds_many :clients, class_name: "Clients"
+    embeds_many :movies, class_name: "Movies"
     field :name, type: String
     
 end
