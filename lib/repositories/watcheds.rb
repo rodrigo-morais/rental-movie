@@ -5,4 +5,5 @@ class Watcheds
 
     field :duration, type: Integer
     belongs_to :movie, class_name: "Movies"
+    embedded_in :client
 end
