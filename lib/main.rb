@@ -1,18 +1,14 @@
 require './lib/rentalStore'
 require './lib/movie'
 require './lib/client'
-require 'mongoid'
-require './lib/repositories/rentalStores'
-
-Mongoid.load!("./mongoid.yml", :development)
-
-@rentalStore = RentalStore.new "Malaju"
 
 def clear
     puts "\e[H\e[2J"
 end
 
 def main
+    rentalStore = RentalStore.new 'Malaju'
+
     clear
 
     puts 'Rental Store'
@@ -144,7 +140,7 @@ def add_watched
 
     @clients[0].add_watched @movies[0], @duration
 
-    @rentalStore.save
+    @rentalStore.updateWatchedMovie(@clients[0].id, @clients[0].watchedMovies.to_a.last)
 
     main
 end

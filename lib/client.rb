@@ -11,8 +11,6 @@ class Client
         @phone = phone
 
         @watchedMovies = Set.new
-
-        @repo = Clients.new(:name => name, :address => address, :phone => phone)
     end
 
     def to_s
@@ -22,10 +20,5 @@ class Client
     def add_watched(movie, duration)
         watched = Watched.new movie, duration
         @watchedMovies << watched
-        @repo.watched_movies << watched.get_repository
-    end
-
-    def get_repository
-        @repo
     end
 end

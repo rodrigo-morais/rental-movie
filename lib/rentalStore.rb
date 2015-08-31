@@ -10,14 +10,12 @@ class RentalStore
         @movieList = Set.new
         @clientList = Set.new
 
-        @repo = RentalStores.where(:name => name).first
+        @repo = RentalStores.new
 
-        if @repo == nil
-            @repo = RentalStores.new(:name => name)
-            save
-        end
+        @repo.get(name)
 
-        @repo.clients.each do |client|
+        
+        @repo.get_clients.each do |client|
             newClient = Client.new client.name, client.address, client.phone
 
             client.watched_movies.each do |watched|
@@ -38,7 +36,6 @@ class RentalStore
             newMovie = Movie.new movie.name, movie.genre, movie.duration
             @movieList << newMovie
         end
-
     end
 
     def movies
