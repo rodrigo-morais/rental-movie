@@ -10,30 +10,22 @@ class RentalStore
         @movieList = Set.new
         @clientList = Set.new
 
-        @repo = RentalStores.new
-
-        @repo.get(name)
-
+        @repo = RentalStores.new name
         
         @repo.get_clients.each do |client|
-            newClient = Client.new client.name, client.address, client.phone
+            newClient = Client.new client[:name], client[:address], client[:phone]
 
-            client.watched_movies.each do |watched|
-                movie = @repo.movies.select{ |movie| movie.id == watched.movie_id }
-                
-                if movie.empty? == false
-                    movie = movie[0]
-                    newMovie = Movie.new movie.name, movie.genre, movie.duration
-
-                    newClient.add_watched newMovie, watched.duration
-                end
-            end
+            #client[:watched_movies].each do |watched|
+            #    newMovie = Movie.new watched[:name], watched[:genre], watched[:duration]
+            #        newClient.add_watched newMovie, watched.duration
+            #    end
+            #end
 
             @clientList << newClient
         end
 
-        @repo.movies.each do |movie|
-            newMovie = Movie.new movie.name, movie.genre, movie.duration
+        @repo.get_movies.each do |movie|
+            newMovie = Movie.new movie[:name], movie[:genre], movie[:duration]
             @movieList << newMovie
         end
     end
@@ -48,14 +40,12 @@ class RentalStore
 
     def add_movie(movie)
         @movieList << movie
-        @repo.movies << movie.get_repository
-        save
+        @repo.add_movie movie
     end
 
     def add_client(client)
         @clientList << client
-        @repo.clients << client.get_repository
-        save
+        @repo.add_client client
     end
 
     def get_movie(name)
@@ -76,10 +66,6 @@ class RentalStore
         end
 
         return @clients.length > 0 ? @clients[0] : nil
-    end
-
-    def save
-        @repo.save!
     end
 
 end

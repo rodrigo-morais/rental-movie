@@ -4,29 +4,68 @@ require './lib/repositories/movies'
 
 class RentalStores
     
-    def initialize
+    def initialize(name)
+        Mongo::Logger.logger.level = ::Logger::FATAL
+
         @db = Mongo::Client.new([ 'RODRIGO-UBUNTU' ], :database => 'rental-store')
-        @coll
+        
+        @name = name
+
+        get name
     end
 
     def get(name)
-        @coll = @db[:rental_stores].find(:name => name).first
+        coll = @db[:rental_stores].find(:name => name).first
 
-        if(@coll == nil)
-            @coll = @db[:rental_stores].insert_one({
-                :name => name
+        if(coll == nil)
+            coll = @db[:rental_stores].insert_one({
+                :name => name,
+                :movies => [],
+                :clients => []
             })
         end
+    end
 
-        @coll
+    def add_movie(movie)
+        rental = @db[:rental_stores]
+        rental.find(name: @name)
+            .update_one({
+                "$push" => { 
+                    movies: {
+                        :_id => rental.find(name: @name).first[:movies].count,
+                        :name => movie.name,
+                        :genre => movie.genre,
+                        :duration => movie.duration
+                    }
+                }
+            })
+    end
+
+    def add_client(client)
+        rental = @db[:rental_stores]
+
+        rental.find(name: @name)
+            .update_one({
+                "$push" => { 
+                    clients: {
+                        :_id => rental.find(name: @name).first[:clients].count,
+                        :name => client.name,
+                        :address => client.address,
+                        :phone => client.phone,
+                        :watched_movies => []
+                    }
+                }
+            })
     end
 
     def get_clients
-        @coll[:clients] || []
+        rental = @db[:rental_stores]
+        rental.find(:name => @name).first[:clients]
     end
 
     def get_movies
-        @coll[:clients] || []
+        rental = @db[:rental_stores]
+        rental.find(:name => @name).first[:movies]
     end
     
 end

@@ -7,7 +7,7 @@ def clear
 end
 
 def main
-    rentalStore = RentalStore.new 'Malaju'
+    @rentalStore = RentalStore.new 'Malaju'
 
     clear
 
