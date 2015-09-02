@@ -44,20 +44,22 @@ class RentalStores
     end
 
     def add_client(client)
-        rental = @db[:rental_stores]
+        if exist_client(client.name) == false
+            rental = @db[:rental_stores]
 
-        rental.find(name: @name)
-            .update_one({
-                "$push" => { 
-                    clients: {
-                        :_id => rental.find(name: @name).first[:clients].count,
-                        :name => client.name,
-                        :address => client.address,
-                        :phone => client.phone,
-                        :watched_movies => []
+            rental.find(name: @name)
+                .update_one({
+                    "$push" => { 
+                        clients: {
+                            :_id => rental.find(name: @name).first[:clients].count,
+                            :name => client.name,
+                            :address => client.address,
+                            :phone => client.phone,
+                            :watched_movies => []
+                        }
                     }
-                }
-            })
+                })
+        end
     end
 
     def get_clients
@@ -76,6 +78,12 @@ class RentalStores
         rental = @db[:rental_stores]
         movies = rental.find(name: @name).first[:movies]
         movies.select{|movie| movie[:name] == name}.count > 0
+    end
+
+    def exist_client(name)
+        rental = @db[:rental_stores]
+        clients = rental.find(name: @name).first[:clients]
+        clients.select{|client| client[:name] == name}.count > 0
     end
     
 end
