@@ -27,18 +27,20 @@ class RentalStores
     end
 
     def add_movie(movie)
-        rental = @db[:rental_stores]
-        rental.find(name: @name)
-            .update_one({
-                "$push" => { 
-                    movies: {
-                        :_id => rental.find(name: @name).first[:movies].count,
-                        :name => movie.name,
-                        :genre => movie.genre,
-                        :duration => movie.duration
+        if exist_movie(movie.name) == false
+            rental = @db[:rental_stores]
+            rental.find(name: @name)
+                .update_one({
+                    "$push" => { 
+                        movies: {
+                            :_id => rental.find(name: @name).first[:movies].count,
+                            :name => movie.name,
+                            :genre => movie.genre,
+                            :duration => movie.duration
+                        }
                     }
-                }
-            })
+                })
+        end
     end
 
     def add_client(client)
@@ -66,6 +68,14 @@ class RentalStores
     def get_movies
         rental = @db[:rental_stores]
         rental.find(:name => @name).first[:movies]
+    end
+
+    private
+
+    def exist_movie(name)
+        rental = @db[:rental_stores]
+        movies = rental.find(name: @name).first[:movies]
+        movies.select{|movie| movie[:name] == name}.count > 0
     end
     
 end
