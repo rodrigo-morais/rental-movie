@@ -9,16 +9,18 @@ class RentalStores
 
         @db = Mongo::Client.new([ 'RODRIGO-UBUNTU' ], :database => 'rental-store')
         
+        @rental = @db[:rental_stores]
+
         @name = name
 
         get name
     end
 
     def get(name)
-        coll = @db[:rental_stores].find(:name => name).first
+        coll = @rental.find(:name => name).first
 
         if(coll == nil)
-            coll = @db[:rental_stores].insert_one({
+            coll = @rental.insert_one({
                 :name => name,
                 :movies => [],
                 :clients => []
@@ -28,12 +30,11 @@ class RentalStores
 
     def add_movie(movie)
         if exist_movie(movie.name) == false
-            rental = @db[:rental_stores]
-            rental.find(name: @name)
+            @rental.find(name: @name)
                 .update_one({
                     "$push" => { 
                         movies: {
-                            :_id => rental.find(name: @name).first[:movies].count,
+                            :_id => @rental.find(name: @name).first[:movies].count,
                             :name => movie.name,
                             :genre => movie.genre,
                             :duration => movie.duration
@@ -45,13 +46,11 @@ class RentalStores
 
     def add_client(client)
         if exist_client(client.name) == false
-            rental = @db[:rental_stores]
-
-            rental.find(name: @name)
+            @rental.find(name: @name)
                 .update_one({
                     "$push" => { 
                         clients: {
-                            :_id => rental.find(name: @name).first[:clients].count,
+                            :_id => @rental.find(name: @name).first[:clients].count,
                             :name => client.name,
                             :address => client.address,
                             :phone => client.phone,
@@ -63,26 +62,22 @@ class RentalStores
     end
 
     def get_clients
-        rental = @db[:rental_stores]
-        rental.find(:name => @name).first[:clients]
+        @rental.find(:name => @name).first[:clients]
     end
 
     def get_movies
-        rental = @db[:rental_stores]
-        rental.find(:name => @name).first[:movies]
+        @rental.find(:name => @name).first[:movies]
     end
 
     private
 
     def exist_movie(name)
-        rental = @db[:rental_stores]
-        movies = rental.find(name: @name).first[:movies]
+        movies = @rental.find(name: @name).first[:movies]
         movies.select{|movie| movie[:name] == name}.count > 0
     end
 
     def exist_client(name)
-        rental = @db[:rental_stores]
-        clients = rental.find(name: @name).first[:clients]
+        clients = @rental.find(name: @name).first[:clients]
         clients.select{|client| client[:name] == name}.count > 0
     end
     
