@@ -69,6 +69,18 @@ class RentalStores
         @rental.find(:name => @name).first[:movies]
     end
 
+    def add_watched_movie(client)
+        @rental.find(name: @name, 'clients._id': client.id)
+            .update_one({
+                "$push" => { 
+                    'clients.$.watched_movies': {
+                        :movie_id => client.watchedMovies.to_a.last.movie.id,
+                        :duration => client.watchedMovies.to_a.last.duration
+                    }
+                }
+            })
+    end
+
     private
 
     def exist_movie(name)

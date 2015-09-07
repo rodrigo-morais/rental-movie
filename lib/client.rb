@@ -5,7 +5,8 @@ class Client
     attr_reader :watchedMovies
 
     
-    def initialize(name, address, phone)
+    def initialize(id, name, address, phone)
+        @id = id
         @name = name
         @address = address
         @phone = phone

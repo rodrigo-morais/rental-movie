@@ -2,13 +2,13 @@ require './lib/rentalStore'
 require './lib/movie'
 require './lib/client'
 
+@rentalStore = RentalStore.new 'Malaju'
+
 def clear
     puts "\e[H\e[2J"
 end
 
 def main
-    @rentalStore = RentalStore.new 'Malaju'
-
     clear
 
     puts 'Rental Store'
@@ -38,7 +38,7 @@ def add_movie
     puts "What's the movies duration?"
     @duration = gets.to_i
 
-    @movie = Movie.new @title, @genre, @duration
+    @movie = Movie.new 0, @title, @genre, @duration
     @rentalStore.add_movie @movie
 
     main
@@ -96,17 +96,12 @@ def add_watched
     clear
 
     puts "What's the client's name?"
-    @name = gets.chomp 
+    client = gets.chomp 
 
-    @clients = @rentalStore.clients.select{
-        |client|
-        client.name == @name
-    }
-
-    if @clients.empty?
+    if @rentalStore.exist_client?(client) == false
         clear
 
-        puts "Doesn't exist a client with name is " + @name
+        puts "Doesn't exist a client with name is " + client
         gets
         main
 
@@ -114,17 +109,12 @@ def add_watched
     end
     
     puts "What's the movie's name?"
-    @name = gets.chomp 
+    movie = gets.chomp
 
-    @movies = @rentalStore.movies.select{
-        |movie|
-        movie.name == @name
-    }
-
-    if @movies.empty?
+    if @rentalStore.exist_movie?(movie) == false
         clear
 
-        puts "Doesn't exist a movie with name is " + @name
+        puts "Doesn't exist a movie with name is " + movie
         gets
         main
 
@@ -132,15 +122,17 @@ def add_watched
     end
 
     puts "What's the movie's duration?"
-    @duration = gets.to_i
+    duration = gets.to_i
 
-    if @duration > @movies[0].duration
-        @duration = @movies[0].duration
+    if @rentalStore.movie_duration_valid?(movie, duration) == false
+        puts "The duration informed to movie " + movie + " is invalid"
+        gets
+        main
+
+        return
     end
 
-    @clients[0].add_watched @movies[0], @duration
-
-    @rentalStore.updateWatchedMovie(@clients[0].id, @clients[0].watchedMovies.to_a.last)
+    @rentalStore.watch_movie(client, movie, duration)
 
     main
 end

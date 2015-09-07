@@ -1,7 +1,8 @@
 class Movie
-    attr_accessor :name, :genre, :duration
+    attr_accessor :id, :name, :genre, :duration
 
-    def initialize(name, genre, duration)
+    def initialize(id, name, genre, duration)
+        @id = id
         @name = name
         @genre = genre
         @duration = duration
