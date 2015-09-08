@@ -74,6 +74,8 @@ class RentalStore
             if client.name == name
                 client
             end
+        end.select do |client|
+            client != nil
         end
 
         return clients.length > 0 ? clients[0] : nil
