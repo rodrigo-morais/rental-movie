@@ -1,6 +1,4 @@
 require 'mongo'
-require './lib/repositories/clients'
-require './lib/repositories/movies'
 
 class RentalStores
     
