@@ -71,7 +71,7 @@ def add_client
     puts "What's the client's phone?"
     @phone = gets
 
-    @client = Client.new @name, @address.gsub(/\n/," "), @phone.gsub(/\n/," ")
+    @client = Client.new 0, @name, @address.gsub(/\n/," "), @phone.gsub(/\n/," ")
     @rentalStore.add_client @client
 
     main
