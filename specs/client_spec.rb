@@ -4,7 +4,7 @@ require './lib/movie'
 
 describe Client do
     before do
-        @client = Client.new "Rodrigo Morais", "24th October Street", "5136845328"
+        @client = Client.new 0, "Rodrigo Morais", "24th October Street", "5136845328"
     end
 
     it "to_s method from client have to return the name of client" do
@@ -16,7 +16,7 @@ describe Client do
     end
 
     it "add a new watched movie in the list of watched movies" do
-        @movie = Movie.new "Back to the future", "Action", 134
+        @movie = Movie.new 0, "Back to the future", "Action", 134
 
         @client.add_watched @movie, 23
 

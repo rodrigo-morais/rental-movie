@@ -3,7 +3,7 @@ require './lib/movie'
 
 describe Watched do
     before do
-        @movie = Movie.new "Back to the future", "Action", 134
+        @movie = Movie.new 0, "Back to the future", "Action", 134
         @watched = Watched.new @movie, 23
     end
 
