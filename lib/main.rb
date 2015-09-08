@@ -1,8 +1,10 @@
 require './lib/rentalStore'
 require './lib/movie'
 require './lib/client'
+require './lib/repositories/rentalStores'
 
-@rentalStore = RentalStore.new 'Malaju'
+repo = RentalStores.new 'Malaju'
+@rentalStore = RentalStore.new 'Malaju', repo
 
 def clear
     puts "\e[H\e[2J"

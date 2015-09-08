@@ -4,13 +4,13 @@ require './lib/repositories/rentalStores'
 class RentalStore
     attr_accessor :name, :id
 
-    def initialize(name)
+    def initialize(name, repo)
         @name = name
 
         @movieList = Set.new
         @clientList = Set.new
 
-        @repo = RentalStores.new name
+        @repo = repo
 
         @repo.get_movies.each do |movie|
             newMovie = Movie.new movie[:_id], movie[:name], movie[:genre], movie[:duration]
