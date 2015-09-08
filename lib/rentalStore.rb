@@ -64,6 +64,8 @@ class RentalStore
             if movie.id == id
                 movie
             end
+        end.select do |movie|
+            movie != nil
         end
         
         return movies.length > 0 ? movies[0] : nil
