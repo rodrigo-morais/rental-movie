@@ -1,9 +1,15 @@
 require './lib/rentalStore'
 require './lib/movie'
+require './lib/repositories/rentalStores'
 
 describe RentalStore do
     before do
-        @rentalStore = RentalStore.new "Maluju"
+        repo = double(:rentalStores)
+        allow(repo).to receive(:get_movies).and_return([])
+        allow(repo).to receive(:get_clients).and_return([])
+        allow(repo).to receive(:add_movie)
+        allow(repo).to receive(:add_client)
+        @rentalStore = RentalStore.new "Maluju", repo
     end
 
     it "the rental store with no movies regtistered have to return none movie in the movie list" do

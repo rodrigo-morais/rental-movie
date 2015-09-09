@@ -26,3 +26,4 @@ DEPENDENCIES
   mongo (~> 2.0.6)
   rspec (>= 3.0.0)
   rspec-expectations
+  rspec-mocks (~> 3.3.2)

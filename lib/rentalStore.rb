@@ -1,5 +1,4 @@
 require 'set'
-require './lib/repositories/rentalStores'
 
 class RentalStore
     attr_accessor :name, :id
