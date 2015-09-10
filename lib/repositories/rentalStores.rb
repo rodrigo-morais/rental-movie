@@ -2,10 +2,10 @@ require 'mongo'
 
 class RentalStores
     
-    def initialize(name)
+    def initialize(name, database='rental-store')
         Mongo::Logger.logger.level = ::Logger::FATAL
 
-        @db = Mongo::Client.new([ 'RODRIGO-UBUNTU' ], :database => 'rental-store')
+        @db = Mongo::Client.new([ 'RODRIGO-UBUNTU' ], :database => database)
         
         @rental = @db[:rental_stores]
 
@@ -77,6 +77,10 @@ class RentalStores
                     }
                 }
             })
+    end
+
+    def drop
+        @db.database.drop
     end
 
     private
